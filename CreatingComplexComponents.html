@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    
+    <!-- head -->
+    <head>
+      <title>More Components!</title>
+      <!-- These two lines bring in both the core React library as well as the various things React needs to work with the DOM. -->
+      <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+      <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+      
+      <!-- Adding a reference to the Babel JavaScript compiler. Babel has the ability to turn JSX into JavaScript. -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+     
+      <style>
+        #container {
+          padding: 50px;
+          background-color: #FFF;
+        }
+      </style>
+    </head>
+    
+    <!-- body --> 
+    <body>
+      <div id="container"></div>
+      <!-- Designate this script block as something that Babel can do its magic on -->
+      <script type="text/babel">
+        //-- Create Square component
+        var Square = React.createClass({
+            render: function() {
+                // modify Square style
+                var squareStyle = {
+                    height: 150,
+                    backgroundColor: this.props.color
+                };
+                
+                return(
+                  <div style={squareStyle}>
+                     
+                  </div>
+                );
+            }
+        });
+        //-- Create Label component 
+        var Label = React.createClass({
+            render: function() {
+                var labelStyle = {
+                    fontFamily: "sans-serif",
+                    fontWeight: "bold",
+                    padding: 13,
+                    margin: 0
+                };
+                
+                return (
+                    <p style={labelStyle}>{this.props.color}</p>
+                );
+            }
+        });
+        //-- Create Card component 
+        var Card = React.createClass({
+            render: function() {
+                // modify Card style
+                var cardStyle = {
+                    height: 200,
+                    width: 150,
+                    padding: 0,
+                    backgroundColor: "#FFF",
+                    WebkitFilter: "drop-shadow(0px 0px 5px #666)",
+                    filter: "drop-shadow(0px 0px 5px #666)"
+                };
+                
+                return (
+                    <div style={cardStyle}>
+                       
+                        <Square color={this.props.color}/>   
+                        
+                        <Label  color={this.props.color}/>    
+                    </div>
+                );
+            }
+        });
+
+        ReactDOM.render(
+            <div>
+                <Card color="#607d8b"/>
+                <Card color="#ff3d00"/>
+                <Card color="#ffd54f"/>
+                <Card color="#69f0ae"/>
+                <Card color="#4fc3f7"/>
+            </div>,
+            document.querySelector("#container")
+        );
+        
+      </script>
+    </body>
+ 
+</html>

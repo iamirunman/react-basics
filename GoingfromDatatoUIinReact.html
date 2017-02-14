@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    
+    <!-- head -->
+    <head>
+        <title>More Components!</title>
+        <!-- These two lines bring in both the core React library as well as the various things React needs to work with the DOM. -->
+        <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+        
+        <!-- Adding a reference to the Babel JavaScript compiler. Babel has the ability to turn JSX into JavaScript. -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+ 
+        <style>
+        #container {
+          padding: 50px;
+          background-color: #FFF;
+        }
+        </style>
+    </head>
+    
+    <!-- body -->
+    <body>
+        <div id="container"></div>
+        <!-- Designate this script block as something that Babel can do its magic on -->
+        <script type="text/babel">
+            //-- Create Circle component
+            var Circle = React.createClass({
+                render: function() {
+                    var circleStyle = {
+                        padding: 10,
+                        margin: 20,
+                        display: "inline-block",
+                        backgroundColor: this.props.bgColor,
+                        borderRadius: "50%",
+                        width: 100,
+                        height: 100,
+                    };
+            
+                    return (
+                        <div style={circleStyle}>
+                        </div>
+                    );
+                }
+            });
+            
+            var destination = document.querySelector("#container");
+            
+            //-- our JSX can actually live outside of a render function
+            function showCircle() {
+                var colors = ["#1e88e5", "#3949ab", "#00acc1", "#43a047"];
+                var ran = Math.floor(Math.random() * colors.length);
+             
+                // return a Circle with a randomly chosen color
+                return <Circle bgColor={colors[ran]}/>;
+            };
+            /*On each component, we specify our key prop and set its value to a 
+             combination of color and index position inside the colors array. 
+             This ensures that each component we dynamically create ends up 
+             getting a unique identifier that React can then use to optimize any 
+             future UI updates.
+             */
+            //==================================================================
+            var colors = ["#b71c1c", "#c62828", "#d32f2f", "#e53935",
+              "#f44336", "#ef5350", "#e57373", "#ef9a9a", "#ffcdd2"];
+             
+            var renderData = [];
+            // create Circle component for each item in color array (and set the bgColor prop to the value of each array item)
+            for (var i = 0; i < colors.length; i++) {
+                var color = colors[i];
+                // key prop whose value React uses to uniquely identify each particular component.  
+                renderData.push(<Circle key={i + color} bgColor={color}/>);
+            }
+            
+            ReactDOM.render(
+                <div>
+                    {showCircle()}
+                    
+                    {renderData}
+                </div>,
+                destination
+            );
+        </script>
+    </body>
+ 
+</html>

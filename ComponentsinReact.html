@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    
+    <!-- head -->
+    <head>
+      <title>React! React! React!</title>
+      <!-- These two lines bring in both the core React library as well as the various things React needs to work with the DOM. -->
+      <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+      <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+      
+      <!-- Adding a reference to the Babel JavaScript compiler. Babel has the ability to turn JSX into JavaScript. -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+      
+      <style>
+        #container {
+          padding: 50px;
+          background-color: #EEE;
+        }
+        #container p {
+          font-size: 48px;
+          font-family: sans-serif;
+          color: #FF0000;
+        }
+      </style>
+    </head>
+    
+    <!-- body --> 
+    <body>
+      <div id="container"></div>
+      <!-- Designate this script block as something that Babel can do its magic on -->
+      <script type="text/babel">
+        //-- Create HelloWorld component. One of many ways to do so
+        var HelloWorld = React.createClass({
+            render: function() {
+              return (
+                //-- Updating component definition
+                <p>Hello, {this.props.greetTarget}!</p> 
+              );
+            }
+        });
+        
+        //-- =======================================================================
+        //-- Create Buttonify component
+        var Buttonify = React.createClass({
+            render: function() {
+              return (
+                <div>
+                  <button type={this.props.behavior}>{this.props.children}</button>
+                </div>
+              );
+            }
+        });
+        //-- Modifying the component call 
+        ReactDOM.render(
+          <div>
+            <HelloWorld greetTarget="Batman"/>
+            <HelloWorld greetTarget="Iron Man"/>
+            <HelloWorld greetTarget="Nicolas Cage"/>
+            <HelloWorld greetTarget="Mega Man"/>
+            <HelloWorld greetTarget="Bono"/>
+            <HelloWorld greetTarget="Catwoman"/>
+            
+            <Buttonify behavior="Submit">SEND DATA</Buttonify>
+          </div>,
+          document.querySelector("#container")
+        );
+      </script> 
+    </body>
+ 
+</html>
+

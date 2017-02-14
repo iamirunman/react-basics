@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    
+    <!-- head -->
+    <head>
+      <title>More Components!</title>
+      <!-- These two lines bring in both the core React library as well as the various things React needs to work with the DOM. -->
+      <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+      <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+      
+      <!-- Adding a reference to the Babel JavaScript compiler. Babel has the ability to turn JSX into JavaScript. -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+     
+      <style>
+        #container {
+            padding: 50px;
+            background-color: #fff000;
+        }
+      </style>
+    </head>
+    
+    <!-- body --> 
+    <body>
+        <div id="container"></div>
+        <!-- Designate this script block as something that Babel can do its magic on -->
+        <script type="text/babel">
+            //-- Create Display component
+            var Display = React.createClass({
+                render: function() {
+                    return(
+                        <div>
+                            <p>{this.props.color}</p>
+                            <p>{this.props.num}</p>
+                            <p>{this.props.size}</p>
+                        </div>
+                    );
+                }
+            });
+            //-- Create Label component 
+            var Label = React.createClass({
+                render: function() {
+                    return (
+                        <Display {...this.props}/>
+                    );
+                }
+            });
+            //-- Create Shirt component 
+            var Shirt = React.createClass({
+                render: function() {
+                    return (
+                        <div>
+                            <Label {...this.props}/>
+                        </div>
+                    );
+                }
+            });
+            
+            ReactDOM.render(
+                <div>
+                    <Shirt color="steelblue" num="3.14" size="medium"/>
+                </div>,
+                document.querySelector("#container")
+            );
+            //=================== SPREAD OPERATOR EXAMPLE ======================
+            var items = ["1", "2", "3"];
+ 
+            function printStuff(a, b, c) {
+                /*prints to the console*/
+                console.log("Printing: " + a + " " + b + " " + c);
+            }
+            
+            /* using the spread operator*/
+            printStuff(...items);
+             
+            /* without using the spread operator*/
+            printStuff(items[0], items[1], items[2]);
+            
+        </script>
+    </body>
+ 
+</html>
+
